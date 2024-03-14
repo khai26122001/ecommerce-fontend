@@ -1,6 +1,6 @@
 import { Checkbox, Rate } from "antd"
 import React from "react"
-import { WrapperLableText, WrapperTextValue, WrapperContent, WrapperTextPrice } from './style'
+import { WrapperLableText, WrapperContent, WrapperTextPrice } from './style'
 import TypeProduct from "../TypeProduct/TypeProduct"
 
 const NvaBarComponents = ({ typeProducts }) => {
@@ -24,26 +24,26 @@ const NvaBarComponents = ({ typeProducts }) => {
             case 'checkbox':
                 return (
                     <Checkbox.Group style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '15px', marginBottom: '15px' }} onChange={onChange} >
-                        {options.map((option) => {
+                        {options.map((option, index) => {
                             return (
-                                <Checkbox style={{ marginLeft: 0 }} value={option.value}>{option.lable}</Checkbox>
+                                <Checkbox key={index} style={{ marginLeft: 0 }} value={option.value}>{option.label}</Checkbox>
                             )
                         })}
                     </Checkbox.Group>
                 )
             case 'star':
-                return options.map((option) => {
+                return options.map((option, index) => {
                     return (
-                        <div style={{ display: 'flex' }}>
+                        <div key={index} style={{ display: 'flex' }}>
                             <Rate style={{ fontSize: '12px' }} disabled defaultValue={option} />
-                            <span> {`tu ${option} sao`} </span>
+                            <span> {`từ ${option} sao`} </span>
                         </div>
                     )
                 })
             case 'price':
-                return options.map((option) => {
+                return options.map((option, index) => {
                     return (
-                        <WrapperTextPrice>{option}</WrapperTextPrice>
+                        <WrapperTextPrice key={index}>{option}</WrapperTextPrice>
                     )
                 })
             default:

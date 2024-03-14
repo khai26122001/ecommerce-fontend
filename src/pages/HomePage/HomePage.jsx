@@ -20,10 +20,13 @@ import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import Loading from '../../components/loadingComponents/Loading'
 import { useDebounce } from '../../hooks/useDebounce'
+import { Image } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const HomePage = () => {
+    const navigate = useNavigate()
 
     // ở đây ta sẽ dùng --useSelector-- để lấy dữ liệu trong --ProductSlide từ store.js--
     const searchProduct = useSelector((state) => state.product?.search)
@@ -58,6 +61,8 @@ const HomePage = () => {
     // sau này sẽ lấy dữ liệu phía mongoDB lên
     const arr = typeProducts
 
+    console.log('typeProducts', typeProducts)
+
 
     // dùng để hiển thị sản phẩm
     const fetchProductAll = async (limitTest) => {
@@ -83,6 +88,12 @@ const HomePage = () => {
     // console.log('isPreviousData', products)
 
 
+    const handleNavigateType = (type) => {
+        // normalize('NFD').replace(/[\u0300-\u036f]/g, '')?.replace(/ /g, '_'): dùng để bỏ đi cái tiếng việt khi kik vào --type--
+        // {state: type}: nhận cái --type-- tiếng việt để tìm kiếm --type--
+        navigate(`/product/${type.normalize('NFD').replace(/[\u0300-\u036f]/g, '')?.replace(/ /g, '_')}`, { state: type })
+    }
+
 
 
     return (
@@ -105,6 +116,12 @@ const HomePage = () => {
                     {/* cho 3 cái ảnh vào mảng | rồi hiển thị ra cái slider */}
                     {/* gọi tới trang --SliderComponents.jsx--  */}
                     <SliderComponent arrImage={[slider1, slider2, slider3, slider4, slider5]} />
+
+                    <div>
+                        <Image onClick={() => handleNavigateType(arr[2])} key={slider2} src={slider2} alt="slider3" preview={false} width="32.4%" height="230px" style={{ marginTop: '5%', cursor: 'pointer' }} />
+                        <Image onClick={() => handleNavigateType(arr[3])} key={slider3} src={slider3} alt="slider3" preview={false} width="32.5%" height="230px" style={{ marginLeft: '4%', marginTop: '5%', cursor: 'pointer' }} />
+                        <Image onClick={() => handleNavigateType(arr[5])} key={slider4} src={slider4} alt="slider3" preview={false} width="32.4%" height="230px" style={{ marginLeft: '8%', marginTop: '5%', cursor: 'pointer' }} />
+                    </div><br /><br />
 
                     {/* gọi tới trang làm khung hình ảnh bán hàng --CardComponents.jsx-- rồi in ra màng hình trang HomePage.jsx */}
                     <WrapperProducts style={{ padding: '0 120px', }}>

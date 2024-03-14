@@ -20,7 +20,7 @@ export const WrapperHeaderAo = styled(Row)`
 // z-index: 1000;
 export const WrapperHeader = styled(Row)`
     padding: 10px 120px;
-    background-color: #BED1DF;
+    background-color: #fff;
     gap: 16px;
     align-items: center;
     flex-wrap:nowrap;
@@ -52,8 +52,9 @@ export const WrapperHeaderAccout = styled.div`
 // white-space: nowrap;: để mấy cái giỏ hàng ko bị rớt 
 export const WrapperTextHeaderSmall = styled.span`
     font-size: 12px;
-    color: #fff;
     white-space: nowrap;
+    cursor: 'pointer';
+    color: #000;
 `
 
 export const WrapperIconHeader = styled.span`
@@ -66,4 +67,11 @@ export const WrapperContentPopup = styled.p`
     &:hover {
         color: rgb(26, 148, 255);
     }
+`
+export const WrapperUnderlined = styled.div`
+    width: 90%; 
+    height: 1px; 
+    background-color: #EDEDED; 
+    margin: auto;
+    margin-top: 10px;
 `

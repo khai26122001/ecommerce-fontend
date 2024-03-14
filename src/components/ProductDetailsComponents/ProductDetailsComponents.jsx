@@ -213,7 +213,7 @@ const ProductDetailsComponents = ({ idProduct }) => {
                     </div>
                     <div style={{ display: 'flex', aliggItem: 'center', gap: '12px' }}>
                         <ButtonComponents
-                            bordered={false}
+                            bordered={'none'}
                             size={40}
                             styleButon={{
                                 background: 'rgb(255, 57, 69)',
@@ -227,7 +227,8 @@ const ProductDetailsComponents = ({ idProduct }) => {
                             styleTextButon={{ color: '#fff', fontSize: '15px', fontWeight: '700px' }}
                         ></ButtonComponents>
 
-                        <ButtonComponents bordered={false}
+                        <ButtonComponents
+                         bordered={'none'}
                             size={40}
                             styleButon={{
                                 background: '#fff',

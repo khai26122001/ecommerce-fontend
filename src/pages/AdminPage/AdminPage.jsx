@@ -1,29 +1,35 @@
 import { Menu } from 'antd';
 import React, { useState } from 'react'
-import { UserOutlined, AppstoreOutlined } from '@ant-design/icons'
+import { UserOutlined, AppstoreOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import { getItem } from '../../utils';
 import HeaderComponents from '../../components/HeaderComponents/HeaderComponents';
 import AdminUser from '../../components/AdminUser/AdminUser';
 import AdminProduct from '../../components/AdminProduct/AdminProduct';
+import OrderAdmin from '../../components/OrderAdmin/OrderAdmin';
 
 const AdminPage = () => {
   const items = [
-    getItem('Người dùng', 'user', <UserOutlined/>),
-    getItem('Sản phẩm', 'product', <AppstoreOutlined/>)
+    getItem('Người dùng', 'user', <UserOutlined />),
+    getItem('Sản phẩm', 'product', <AppstoreOutlined />),
+    getItem('Đơn Hàng', 'order', <ShoppingCartOutlined />),
   ];
 
   const [keySelected, setKeySelected] = useState(['']);
 
   // dùng để chuyển giữa --user và product-- bằng key
   const renderPage = (key) => {
-    switch(key) {
+    switch (key) {
       case 'user':
         return (
-          <AdminUser/>
+          <AdminUser />
         )
       case 'product':
         return (
-          <AdminProduct/>
+          <AdminProduct />
+        )
+      case 'order':
+        return (
+          <OrderAdmin />
         )
       default:
         return <></>
@@ -39,25 +45,25 @@ const AdminPage = () => {
 
   return (
     <>
-        {/* laays thanh --header-- để hiển thị cái tên --admin-- trên thanh đó để có thể quay lại trang --client-- */}
-        {/* 2 biến --isHiddenSearch và isHiddenCart-- này tượng trưng cho --true-- để chỉ hiển thị tên trang --web với tên admin-- */}
-        <HeaderComponents isHiddenSearch isHiddenCart/>
+      {/* laays thanh --header-- để hiển thị cái tên --admin-- trên thanh đó để có thể quay lại trang --client-- */}
+      {/* 2 biến --isHiddenSearch và isHiddenCart-- này tượng trưng cho --true-- để chỉ hiển thị tên trang --web với tên admin-- */}
+      <HeaderComponents isHiddenSearch isHiddenCart />
 
-        <div style={{ display: 'flex', }}>
-            <Menu
-                mode="inline"
-                style={{
-                    width: 256,
-                    boxShadow: '1px 1px 2px #ccc',
-                    height: '100vh'
-                }}
-                items={items}
-                onClick={handleOnClick}
-            />
-            <div style={{ flex: 1, padding: '15px' }}>
-              {renderPage(keySelected)}
-            </div>
+      <div style={{ display: 'flex', }}>
+        <Menu
+          mode="inline"
+          style={{
+            width: 256,
+            boxShadow: '1px 1px 2px #ccc',
+            height: '100vh'
+          }}
+          items={items}
+          onClick={handleOnClick}
+        />
+        <div style={{ flex: 1, padding: '15px' }}>
+          {renderPage(keySelected)}
         </div>
+      </div>
     </>
   )
 }

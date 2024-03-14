@@ -5,7 +5,7 @@ import Search from 'antd/es/input/Search'
 // phân chia chiều ngang thành 24 phần dùng đẻ chia khung từ thư viện --'antd'--
 import { Badge, Col, Image, Popover } from 'antd'
 // các tên trùng với tên bên phía css lấy qua thông qua --'./style'--
-import { WrapperHeader, WrapperHeaderAccout, WrapperTextHeader, WrapperTextHeaderSmall, WrapperContentPopup, WrapperHeaderAo } from './style'
+import { WrapperHeader, WrapperHeaderAccout, WrapperTextHeader, WrapperTextHeaderSmall, WrapperContentPopup, WrapperHeaderAo, WrapperUnderlined } from './style'
 // này là các icon lấy trên các trang khác thông qua thư viện --'@ant-design/icons'--
 import {
     UserOutlined,
@@ -122,6 +122,7 @@ const HeaderComponents = ({ isHiddenSearch = false, isHiddenCart = false }) => {
             })
         } else {
             handleLogout()
+            navigate('/')
         }
     }
 
@@ -136,7 +137,7 @@ const HeaderComponents = ({ isHiddenSearch = false, isHiddenCart = false }) => {
 
 
     return (
-        <div style={{ width: '100%', background: 'rgb(26, 148, 255)', justifyContent: 'center' }}>
+        <div style={{ width: '100%', background: '#fff', justifyContent: 'center' }}>
 
             {/* nay cho thanh cuốn header có thể duy chuyển dx */}
             <WrapperHeaderAo></WrapperHeaderAo>
@@ -168,9 +169,9 @@ const HeaderComponents = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                         {/* trang chỉnh css cho cái tìm kiếm */}
                         <ButtonInputSearch
                             size="large"
-                            textButton="Tìm kiếm"
+                            // textButton="Tìm kiếm"
                             placeholder="input search text"
-                            bordered={false}
+                            bordered={'none'}
                             onChange={onSearch}
                         />
                     </Col>
@@ -201,7 +202,7 @@ const HeaderComponents = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                                     {/* hiển thị nút --khi bấm vào user name được hiển thị sẽ hiển thị --logout---- */}
                                     <Popover content={content} trigger="click" >
                                         {/* khi đăng nhập vào sẽ có được cái --user(name)-- */}
-                                        <div style={{ cursor: 'pointer', color: '#ffff' }}>{userName?.length ? userName : user?.email}</div>
+                                        <div style={{ cursor: 'pointer', color: '#000' }}>{userName?.length ? userName : user?.email}</div>
                                     </Popover>
                                 </>
                             ) : (
@@ -213,7 +214,7 @@ const HeaderComponents = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                                     <div>
                                         {/* Text tài khoản và biểu tượng mũi tên xuống */}
                                         <WrapperTextHeaderSmall>Tài khoảng</WrapperTextHeaderSmall>
-                                        <CaretDownOutlined />
+                                        <CaretDownOutlined style={{ color: '#0297' }} />
                                     </div>
                                 </div>
                             )}
@@ -227,14 +228,16 @@ const HeaderComponents = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                         <div onClick={() => navigate('/order')} style={{ cursor: 'pointer' }}>
                             {/* Badge: dùng để hiển thị số lượng hàn trên icon giỏ hàng */}
                             <Badge count={order?.orderItems?.length >= 1 ? order?.orderItems?.length : "O"} size="small">
-                                <ShoppingCartOutlined style={{ fontSize: '30px', color: '#fff' }} />
+                                <ShoppingCartOutlined style={{ fontSize: '30px' }} />
                             </Badge>
-                            <WrapperTextHeaderSmall style={{ cursor: 'pointer', color: '#ffff' }}>Giỏ hàng</WrapperTextHeaderSmall>
+                            <WrapperTextHeaderSmall >Giỏ hàng</WrapperTextHeaderSmall>
                         </div>
                     )}
 
                 </Col>
             </WrapperHeader>
+
+            <WrapperUnderlined></WrapperUnderlined>
 
         </div>
     )

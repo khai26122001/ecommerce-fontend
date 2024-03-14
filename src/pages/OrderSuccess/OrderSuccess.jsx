@@ -54,9 +54,9 @@ const OrderSuccess = () => {
               </WrapperInfo>
 
               <WrapperItemOrderInfo >
-                {state.orders?.map((order) => {
+                {state.orders?.map((order, index) => {
                   return (
-                    <WrapperItemOrder >
+                    <WrapperItemOrder key={index}>
                       <div style={{ width: '400px', display: 'flex', alignItems: 'center', gap: 4, marginLeft: '150px' }}>
                         {/* khi clik vào thì sẽ hiển thị ra id thông qua value={order?.product}  */}
                         {/* checked={listChecked.includes(order?.product): hiển thị khi kik vào toàn bộ thì sẽ truyền id zo */}

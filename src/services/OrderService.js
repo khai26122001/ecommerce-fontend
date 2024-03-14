@@ -45,6 +45,7 @@ return res.data
 }
   
   
+// làm trang quản lý đơn hàng
 export const getAllOrder = async (access_token) => {
 const res = await axiosJWT.get(`http://localhost:3000/api/order/get-all-order`, {
     headers: {

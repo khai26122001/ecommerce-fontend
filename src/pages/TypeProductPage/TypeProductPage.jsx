@@ -45,7 +45,7 @@ const TypeProductPage = () => {
     //----------------------------------------------------------
     // hiển thị ra cái type của products
     const [typeProducts, setTypeProducts] = useState([])
-    
+
     // getAllTypeProduct
     // dùng để hiển thị type sản phẩm
     const fetchAllTypeProduct = async () => {
@@ -73,7 +73,7 @@ const TypeProductPage = () => {
     const fetchProductType = async (state, page, limit) => {
         setIsPending(true)
         const res = await ProductService.getProductType(state, page, limit)
-        if (res?.status == 'OK') {
+        if (res?.status === 'OK') {
             setIsPending(false)
             setProducts(res?.data)
             // bắt đầu làm phân trang
@@ -100,13 +100,31 @@ const TypeProductPage = () => {
         setPanigate({ ...panigate, page: current - 1 })
     }
 
+    const onChange1 = () => {
+        // console.log({ current, pageSize })
+        setPanigate({ page: 0, limit: 2, total: 1, })
+    }
+
+
+    useEffect(() => {
+        // Reset page to 0 when type changes
+        setPanigate(prevPanigate => ({ ...prevPanigate, page: 0 }));
+    
+        if (state) {
+            fetchProductType(state, 0, panigate.limit); // Reset page to 0 when type changes
+        }
+    }, [state]); // Only trigger when state changes
+
+
+
+
     return (
         <Loading isPending={isPending}>
             <div style={{ padding: '0 120px', background: '#efefef', height: 'calc(100vh - 64px' }}>
                 <div style={{ width: '1270px', margin: '0 auto', height: '70%' }}>
                     <Row style={{ flexWrap: 'nowrap', paddingTop: '10px', height: 'calc(100% - 20px)' }}>
                         <WrapperNavbar span={4}>
-                            <NvaBarComponents typeProducts={arr}/>
+                            <NvaBarComponents typeProducts={arr} key={arr} />
                         </WrapperNavbar>
                         <Col span={24} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                             <WrapperProducts >

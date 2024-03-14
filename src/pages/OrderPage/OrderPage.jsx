@@ -322,9 +322,9 @@ const OrderPage = () => {
               </div>
             </WrapperStyleHeader>
             <WrapperListOrder>
-              {order?.orderItems?.map((order) => {
+              {order?.orderItems?.map((order, index) => {
                 return (
-                  <WrapperItemOrder>
+                  <WrapperItemOrder key={index}>
                     <div style={{ width: '390px', display: 'flex', alignItems: 'center', gap: 4 }}>
                       {/* khi clik vào thì sẽ hiển thị ra id thông qua value={order?.product}  */}
                       {/* checked={listChecked.includes(order?.product): hiển thị khi kik vào toàn bộ thì sẽ truyền id zo */}

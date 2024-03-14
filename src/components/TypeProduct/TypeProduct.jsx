@@ -12,33 +12,34 @@ const TypeProduct = ({ name }) => {
         // {state: type}: nhận cái --type-- tiếng việt để tìm kiếm --type--
         navigate(`/product/${type.normalize('NFD').replace(/[\u0300-\u036f]/g, '')?.replace(/ /g, '_')}`, { state: type })
     }
-    
+
 
     return (
-        // in tất cả thành phần trong --name-- ra
-        <div style={{
-            fontSize: 15,
-            padding: '10px 10px',
-            cursor: 'pointer',
-            position: 'relative',
-            transition: 'color 0.3s ease-in-out'
-        }}
+        <div
+            style={{
+                fontSize: 15,
+                padding: '10px 10px',
+                cursor: 'pointer',
+                position: 'relative',
+            }}
             onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)} onClick={() => handleNavigateType(name)}>
+            onMouseLeave={() => setHovered(false)}
+            onClick={() => handleNavigateType(name)}
+        >
             <span style={{ color: hovered ? '#c48c46' : 'black', transition: 'color 0.01s #c48c46' }}>{name}</span>
-            {hovered && (
-                <div style={{
+            <div
+                style={{
                     position: 'absolute',
                     left: 0,
                     bottom: 0,
-                    width: '100%',
+                    width: hovered ? '100%' : '0%',
                     height: '2px',
                     backgroundColor: '#c48c46',
-                    animation: 'run 0.1s linear forwards'
-                }}></div>
-            )}
+                    transition: 'width 0.5s ease-in-out',
+                }}
+            />
         </div>
-    )
+    );
 }
 
 export default TypeProduct

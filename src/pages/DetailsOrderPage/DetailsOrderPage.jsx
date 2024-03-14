@@ -68,9 +68,9 @@ const DetailsOrderPage = () => {
                             <WrapperItemLabel>Số lượng</WrapperItemLabel>
                             <WrapperItemLabel>Giảm giá</WrapperItemLabel>
                         </div>
-                        {data?.orderItems?.map((order) => {
+                        {data?.orderItems?.map((order, index) => {
                             return (
-                                <WrapperProduct>
+                                <WrapperProduct key={index}>
                                     <WrapperNameProduct>
                                         <img src={order?.image}
                                             style={{

@@ -26,7 +26,9 @@ export const WrapperSliderStyle = styled(Slider)`
         li {
             button {
                 &::before {
-                    color: rgb(255, 255, 0.5);
+                    color: #00000;
+                    font-size: 13px;
+                    margin-top: -17px;
                 }
             }
         }

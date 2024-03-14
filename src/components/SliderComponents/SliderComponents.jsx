@@ -19,15 +19,16 @@ const SliderComponent = ({ arrImage }) => {
 
     // in slider ra thông qua thư viện (Slider) và (Image)
     return (
-            <WrapperSliderStyle {...settings}>
-                {/* lấy ảnh từ --arrImage-- rồi gán vào --image-- */}
-                {arrImage.map((image) => {
-                    // in ra hình ảnh thông qua thẻ --Image--
-                    return (
-                        <Image key={image} src={image} alt="slider" preview={false} width="100%" height="350px"/>
-                    )
-                })}
-            </WrapperSliderStyle>
+        <WrapperSliderStyle {...settings}>
+            {/* lấy ảnh từ --arrImage-- rồi gán vào --image-- */}
+            {arrImage.map((image) => {
+                // in ra hình ảnh thông qua thẻ --Image--
+                return (
+                    <Image key={image} src={image} alt="slider" preview={false} width="100%" height="462px" />
+                )
+            })}
+
+        </WrapperSliderStyle>
     )
 }
 
