@@ -7,7 +7,7 @@ const initialState = {
   address: '',
   avatar: '',
   access_token: '',
-  // refreshToken: '',
+  refreshToken: '',
   id: '',
   // này dùng để check xem phải admin ko nếu phải chuyến sang trang admin
   isAdmin: false,
@@ -23,7 +23,7 @@ export const userSlide = createSlice({
     updateUser: (state, action) => {
         // name = '': nếu ko có thì bằng rổng
         const { name = '', email = '', phone = '', address = '', avatar = '', access_token = '', _id = '', isAdmin, city = '',
-         } = action.payload
+        refreshToken = '' } = action.payload
         // do chưa có name nên cho nó bằng email luôn
         // state.name = name || email;
         state.name = name;
@@ -33,7 +33,7 @@ export const userSlide = createSlice({
         state.avatar = avatar;
         state.id = _id;
         state.access_token = access_token;
-        // state.refreshToken = refreshToken;
+        state.refreshToken = refreshToken;
         state.isAdmin = isAdmin;
         state.city = city;
         // sau khi kiểm tra ta sẽ thấy --action-- chưa toàn bộ 
@@ -51,7 +51,7 @@ export const userSlide = createSlice({
       state.avatar = '';
       state.id = '';
       state.access_token = '';
-      // state.refreshToken = ''
+      state.refreshToken = ''
       state.isAdmin = false;
       state.city = '';
     }, 

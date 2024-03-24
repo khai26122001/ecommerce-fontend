@@ -33,23 +33,14 @@ export const getDetailsUser = async (id, access_token) => {
 
 
 // thêm --refreshToken-- zo để đưa lên host
-// export const refreshToken = async (refreshToken) => {
-//     console.log('refreshToken', refreshToken)
-//     const res = await axios.post(`http://localhost:3000/api/user/refresh-token`, {}, {
-//         // này có tác dụng khi mà có --cookie-- nó sẽ tự động lấy cho mình rồi chuyền xuống backend
-//         // withCredentials: true
-//         headers: {
-//             token: `Bearer ${refreshToken}`,
-//         }
-//     })
-//     return res.data
-// }
-
-export const refreshToken = async () => {
-    // console.log('refreshToken', refreshToken)
-    const res = await axios.post(`http://localhost:3000/api/user/refresh-token`, {
+export const refreshToken = async (refreshToken) => {
+    console.log('refreshToken', refreshToken)
+    const res = await axios.post(`http://localhost:3000/api/user/refresh-token`, {}, {
         // này có tác dụng khi mà có --cookie-- nó sẽ tự động lấy cho mình rồi chuyền xuống backend
-        withCredentials: true
+        // withCredentials: true
+        headers: {
+            token: `Bearer ${refreshToken}`,
+        }
     })
     return res.data
 }
