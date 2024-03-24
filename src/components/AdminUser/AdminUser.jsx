@@ -364,7 +364,7 @@ const AdminUser = () => {
   }
 
   const handleDeleteUserMany = () => {
-    
+
   }
 
   // sử dụng để gọi tới hàm và in ra thông báo --update-- thành công hay thất bại
@@ -458,7 +458,7 @@ const AdminUser = () => {
 
       <div style={{ marginTop: '20px' }}>
         {/* sau khi đã có dữ liệu thì ta chuyền xuống table */}
-        <TableComponent columns={columns} handleDeleteManyProduct={handleDeleteManyProduct}  isPending={isPendingUser} data={dataTable} onRow={(record, rowIndex) => {
+        <TableComponent columns={columns} handleDeleteManyProduct={handleDeleteManyProduct} isPending={isPendingUser} data={dataTable} onRow={(record, rowIndex) => {
           return {
             onClick: (event) => {
               setRowSelected(record._id)
