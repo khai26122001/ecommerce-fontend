@@ -12,7 +12,8 @@ import { isJsonString } from './utils'
 // sau khi --login-- thành công thi add thư viện này zo n
 // dùng để lấy thông tin của user
 import { useDispatch, useSelector } from 'react-redux'
-import { resetUser, updateUser } from './redux/slides/userSlide'
+import { resetUser } from './redux/slides/userSlide'
+import { updateUser } from './redux/slides/userSlide'
 
 // link tới trang --UserService--
 import * as UserService from './services/UserService'
@@ -77,12 +78,16 @@ useEffect(() => {
 const handleDecoded = () => {
   // lúc này ta sẽ --getItem-- lấy dữ liệu ra bên phía --signIn-- từ --setItem-- trước đó
   // lúc này ta sẽ nhận được cái --access_token-- bên phía --app.js-- nhằm duy trì nó ko mất khi khởi động lại
-  let storageData = localStorage.getItem('access_token') || user?.access_token
+
+  // let storageData = localStorage.getItem('access_token') || user?.access_token
+  let storageData = localStorage.getItem('access_token')
   let decode = {}
   // console.log('storageDataApp', storageData, isJsonString(storageData))
   
   // nếu tồn tại cái --access_token và true-- thì thực hiện
-  if(storageData && isJsonString(storageData) && !user?.access_token) {
+
+  // if(storageData && isJsonString(storageData) && !user?.access_token) {
+  if(storageData && isJsonString(storageData)) {
       // chuyển về kiểu --json--
       storageData = JSON.parse(storageData)
       // dùng để nhận cái  --id và isAdmin-- của user thông qua hàm ---jwtDecode()--- với biến là --access_token--
@@ -111,9 +116,9 @@ UserService.axiosJWT.interceptors.request.use(async (config) => {
 
 
   // thêm refresh_token zo để đưa lên host
-  let storageRefreshToken = localStorage.getItem('refresh_token')
-  const refreshToken = JSON.parse(storageRefreshToken)
-  const decodedRefreshToken = jwtDecode(refreshToken)
+  // let storageRefreshToken = localStorage.getItem('refresh_token')
+  // const refreshToken = JSON.parse(storageRefreshToken)
+  // const decodedRefreshToken = jwtDecode(refreshToken)
 
 
 
@@ -128,17 +133,24 @@ UserService.axiosJWT.interceptors.request.use(async (config) => {
   if (decode?.exp < currentTime.getTime() / 1000) {
 
 
-    // thêm 1 vòng lặp nữa để đưa lên host
-    // xem cái refreshToken đó còn hạn ko nếu còn hạn thì cấp lại cái access_token
-    if(decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
-      // gọi tới để cấp lại --token--
-      const data = await UserService.refreshToken(refreshToken)
-      // sau khi có được data.access_token ta sẽ tiến hành lấy ra
-      config.headers['token'] = `Bearer ${data?.access_token}`
-      // console.log('config.headers', config.headers['token'])
-    } else {
-      dispatch(resetUser())
-    }
+    // // thêm 1 vòng lặp nữa để đưa lên host
+    // // xem cái refreshToken đó còn hạn ko nếu còn hạn thì cấp lại cái access_token
+    // if(decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
+    //   // gọi tới để cấp lại --token--
+    //   // const data = await UserService.refreshToken(refreshToken)
+    //   const data = await UserService.refreshToken()
+    //   // sau khi có được data.access_token ta sẽ tiến hành lấy ra
+    //   config.headers['token'] = `Bearer ${data?.access_token}`
+    //   // console.log('config.headers', config.headers['token'])
+    // } else {
+    //   dispatch(resetUser())
+    // }
+
+
+
+    const data = await UserService.refreshToken()
+    // sau khi có được data.access_token ta sẽ tiến hành lấy ra
+    config.headers['token'] = `Bearer ${data?.access_token}`
 
 
   }
@@ -157,8 +169,8 @@ const handleGetDetailsUser = async (id, token) => {
     try {
 
       // đưa lên host nên thêm refresh_token zo
-      let storageRefreshToken = localStorage.getItem('refresh_token')
-      const refresh_token = JSON.parse(storageRefreshToken)
+      // let storageRefreshToken = localStorage.getItem('refresh_token')
+      // const refresh_token = JSON.parse(storageRefreshToken)
 
 
 
@@ -172,7 +184,10 @@ const handleGetDetailsUser = async (id, token) => {
 
       // ta sẽ chuyền thông tin --_id, mail, password, isAdmin-- và --access_token-- cho updateUser
       // để lấy ra sử dụng bên phía --client-- thì phải
-      dispatch(updateUser({ ...res?.data, access_token: token, refresh_token: refresh_token }))
+
+
+      // dispatch(updateUser({ ...res?.data, access_token: token, refresh_token: refresh_token }))
+      dispatch(updateUser({ ...res?.data, access_token: token }))
     } catch (error) {
       
     }
