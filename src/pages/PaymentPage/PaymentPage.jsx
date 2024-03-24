@@ -11,10 +11,16 @@ import ModalComponent from '../../components/ModalComponent/ModalComponent';
 import Loading from '../../components/loadingComponents/Loading';
 import InputComponents from '../../components/InputComponents/InputComponents';
 
+// thanh toán
+import { PayPalButton } from "react-paypal-button-v2";
+
 // link tới trang --UserService--
 import * as UserService from '../../services/UserService'
 // link tới trang --OrderService--
 import * as OrderService from '../../services/OrderService'
+
+// link tới trang thanh toán
+import * as PaymentService from '../../services/PaymentService'
 
 // link tới trang dùng để lấy dữ liệu dưới backend lên
 import { useMutationHooks } from '../../hooks/useMutationHooks'
@@ -50,6 +56,10 @@ const PaymentPage = () => {
     address: '',
     city: '',
   })
+
+
+  // dùng để thanh toán
+  const [sdkReady, setSdkReady] = useState(false)
 
 
 
@@ -235,6 +245,32 @@ const PaymentPage = () => {
 
 
 
+  // thanh toán thành công
+  const onSuccessPaypal = (details, data) => {
+    mutationAddOrder.mutate(
+      {
+        token: user?.access_token,
+        orderItems: order?.orderItemsSelected,
+        fullName: user?.name,
+        address: user?.address,
+        phone: user?.phone,
+        city: user?.city,
+        paymentMethod: payment,
+        itemsPrice: priceMemo,
+        shippingPrice: diliveryPriceMemo,
+        totalPrice: totalPriceMemo,
+        user: user?.id,
+        // trạng thái thanh toán
+        isPaid: true,
+        // thời gian đặt hàng
+        paidAt: details.update_time
+      }
+    )
+    console.log('details, data', details, data)
+  }
+
+
+
 
   // bắt đầu update ------------------
   const handleUpdateInfoUser = () => {
@@ -279,6 +315,46 @@ const PaymentPage = () => {
     setPayment(e.target.value)
   }
 
+
+
+
+
+
+  // thanh toán
+  const addPaypalScript = async () => {
+    // sau khi nhận được cái --CLIENT_ID--
+    const { data } = await PaymentService.getConfig()
+    console.log('data config', data)
+    // thì bắt đầu làm scrip
+    const script = document.createElement('script')
+    // add nó về kiểu --text/javascrupt--
+    script.type = 'text/javascript'
+
+    // bắt đầu tiến hành
+    script.src = `https://www.paypal.com/sdk/js?client-id=${data}`
+    // sau đó phải sét cho cái scrip này là bất đồng bộ
+    script.async = true;
+
+    // sau đó mới chạy (load) cái scrip
+    script.onload = () => {
+      // lúc đang load thì cho --setSdkReady-- bằng true
+      setSdkReady(true)
+    }
+    document.body.appendChild(script)
+  }
+
+  useEffect(() => {
+    // nếu đã tồn tại cái --paypal-- thì sẽ chạy vào hàm --addPaypalScript()-- để sét --setSdkReady(true)-- 
+    if (!window.paypal) {
+      addPaypalScript()
+    } else {
+      // còn đã tồn tại rồi thì cứ sét tiếp cho nó bằng true
+      setSdkReady(true)
+    }
+
+  }, [])
+
+
   return (
     <div style={{ background: '#f5f5fa', with: '100%', height: '100vh' }}>
       <Loading isPending={isPendingAddOrder}>
@@ -299,6 +375,7 @@ const PaymentPage = () => {
                 <label>Chọn Phương Thức Thanh Toán</label>
                 <WrapperRadio onChange={handlePatment}>
                   <Radio value="later_money"> Thanh Toán Tiền Mặt Khi Nhận Hàng</Radio>
+                  <Radio value="paypal"> paypal</Radio>
                 </WrapperRadio>
               </WrapperInfo>
             </WrapperLeft>
@@ -341,19 +418,35 @@ const PaymentPage = () => {
                   </span>
                 </WrapperTotal>
               </div>
-              <ButtonComponents
-                onClick={() => handleAddOrder()}
-                size={40}
-                styleButon={{
-                  background: 'rgb(255, 57, 69)',
-                  height: '48px',
-                  width: '320px',
-                  border: 'none',
-                  borderRadius: '4px'
-                }}
-                textButton={'Đặt Hàng'}
-                styleTextButon={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
-              ></ButtonComponents>
+
+              {/*  */}
+              {payment === 'paypal' && sdkReady ? (
+                <div style={{ width: '320px' }}>
+                  <PayPalButton
+                    amount={totalPriceMemo}
+                    // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                    onSuccess={onSuccessPaypal}
+                    onError={() => {
+                      alert('lỗi')
+                    }}
+                  />
+                </div>
+              ) : (
+                <ButtonComponents
+                  onClick={() => handleAddOrder()}
+                  size={40}
+                  styleButon={{
+                    background: 'rgb(255, 57, 69)',
+                    height: '48px',
+                    width: '320px',
+                    border: 'none',
+                    borderRadius: '4px'
+                  }}
+                  textButton={'Đặt Hàng'}
+                  styleTextButon={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
+                ></ButtonComponents>
+              )}
+
             </WrapperRight>
           </div>
         </div>

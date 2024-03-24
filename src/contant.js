@@ -6,5 +6,6 @@ export const oderContant = {
     },
     payment: {
         later_money: 'Thanh Toán Tiền Mặt Khi Nhận Hàng',
+        paypal: 'Thanh Toán bằng Paypal'
     }
 }

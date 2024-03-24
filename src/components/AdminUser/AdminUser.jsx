@@ -169,7 +169,7 @@ const AdminUser = () => {
     return (
       <div>
         <DeleteOutlined style={{ color: 'red', fontSize: '30px', cursor: 'pointer', marginRight: '30px' }} onClick={() => setIsModalOpenDelete(true)} />
-        <EditOutlined style={{ color: 'red', fontSize: '30px', cursor: 'pointer' }} onClick={handleDetailsUser} />
+        <EditOutlined style={{ color: 'blue', fontSize: '30px', cursor: 'pointer' }} onClick={handleDetailsUser} />
       </div>
     )
   }

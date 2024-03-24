@@ -22,6 +22,7 @@ import Loading from '../../components/loadingComponents/Loading'
 import { useDebounce } from '../../hooks/useDebounce'
 import { Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import FooterComponents from '../../components/FooterComponents/FooterComponents'
 
 
 
@@ -37,7 +38,7 @@ const HomePage = () => {
 
     // const [loading, isLoading] = useState(false)
     // sét để khi vừa vào nó sẽ hiện 8 sản phẩm
-    const [limit, setLimit] = useState(8)
+    const [limit, setLimit] = useState(10)
 
     // hiển thị ra cái type của products
     const [typeProducts, setTypeProducts] = useState([])
@@ -167,6 +168,7 @@ const HomePage = () => {
 
                 </div>
             </div>
+
         </Loading>
     )
 }

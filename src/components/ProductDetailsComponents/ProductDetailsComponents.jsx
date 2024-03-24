@@ -228,7 +228,7 @@ const ProductDetailsComponents = ({ idProduct }) => {
                         ></ButtonComponents>
 
                         <ButtonComponents
-                         bordered={'none'}
+                            bordered={'none'}
                             size={40}
                             styleButon={{
                                 background: '#fff',
@@ -242,6 +242,13 @@ const ProductDetailsComponents = ({ idProduct }) => {
                         ></ButtonComponents>
                     </div>
                 </Col>
+            </Row>
+
+
+
+            <Row style={{ padding: '16px', background: '#fff', marginTop: "20px", marginBottom: '-30px' }}>
+                {/* dùng này để hiển thị dữ liệu của --ckeditor-- ra */}
+                <div dangerouslySetInnerHTML={{ __html: stateProductDetail?.description }} />
             </Row>
         </Loading>
     )

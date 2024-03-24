@@ -20,11 +20,11 @@ const ProfilePage = () => {
   // dùng để xuất dữ liệu đã được xử lý từ --UserSlide.js-- ra
   const user = useSelector((state) => state.user)
 
-  const[name, setName] = useState('')
-  const[email, setEmail] = useState('')
-  const[phone, setPhone] = useState('')
-  const[address, setAddress] = useState('')
-  const[avatar, setAvatar] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [address, setAddress] = useState('')
+  const [avatar, setAvatar] = useState('')
 
   // ------------------------------------------------
   // bắt đầu làm lấy dữ liệu dưới backend lên
@@ -38,7 +38,7 @@ const ProfilePage = () => {
       UserService.updateUser(id, rests, access_token)
     }
   )
-      
+
   // dùng để lấy thông tin của user
   const dispatch = useDispatch()
 
@@ -51,22 +51,22 @@ const ProfilePage = () => {
 
   // khi thằng --user-- nó thay đổi thì ta sẽ bắt đầu --setUser--
   useEffect(() => {
-      setName(user?.name)
-      setEmail(user?.email)
-      setPhone(user?.phone)
-      setAddress(user?.address)
-      setAvatar(user?.avatar)
-  },[user])
+    setName(user?.name)
+    setEmail(user?.email)
+    setPhone(user?.phone)
+    setAddress(user?.address)
+    setAvatar(user?.avatar)
+  }, [user])
 
   // khi thằng --isSuccess, isError-- nó thay đổi thì ta sẽ bắt đầu
   // hàm này dùng để xử lý việc call API bên phía backend
   useEffect(() => {
     // nếu isSuccess===true
-    if(isSuccess) {
-        message.success()
-        handleGetDetailsUser(user?.id, user?.access_token)
-    } else if(isError) {
-        message.error()
+    if (isSuccess) {
+      message.success()
+      handleGetDetailsUser(user?.id, user?.access_token)
+    } else if (isError) {
+      message.error()
     }
   }, [isSuccess, isError])
 
@@ -103,12 +103,12 @@ const ProfilePage = () => {
     setAddress(value)
   }
 
-  const handleOnchangeAvatar = async ({fileList}) => {
+  const handleOnchangeAvatar = async ({ fileList }) => {
     // nó sẽ là 1 cái --array--
     const file = fileList[0]
     // giờ ta phải chuyển sang dạng --base64-- để lưu lên --mongo--
     // ta sẽ check cái chuyển đổi sang --base64-- bên phía --util--
-    if(!file.url && !file.preview) {
+    if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
     // sau khi đã chuyển đổi thì ta sẽ chuyển dữ liệu ảnh --base64-- vào --setAvatar--
@@ -121,31 +121,32 @@ const ProfilePage = () => {
   }
 
   return (
-    <div style={{ width: '1270px', margin: '0 auto', height: '500px' }}>
+    <div style={{ width: '100%', height: '100%', backgroundColor: "rgb(237, 237, 237)", marginTop: '-30px' }}>
+      <br />
       <WrapperHeader>Thông tin người dùng</WrapperHeader>
       <Loading isPending={isPending}>
-        <WrapperContentProfile>
+        <WrapperContentProfile style={{ backgroundColor: '#fff' }}>
 
           <WrapperInput>
             {/* nơi nhập vào email */}
             <WrapperLabel htmlFor="name">Name</WrapperLabel>
             {/* đặt id cho --input-- để tý lấy dữ liệu thông qua id */}
-            <InputForm style={{ width: '300px' }} id="name" value={name} onChange={handleOnchangeName}/>  
+            <InputForm style={{ width: '300px' }} id="name" value={name} onChange={handleOnchangeName} />
 
             {/* nút button */}
-            <ButtonComponents 
-                // khi kik vào --đăng ký-- thì sẽ chạy hàm --handleSignIn--
-                onClick={ handleUpdate }
-                // bordered={false}
-                size={40}
-                styleButon={{
-                    height: '30px',
-                    width: 'fit-content',
-                    borderRadius: '4px',
-                    padding: '2px 6px 6px'
-                }}
-                textButton={'Cập nhật'}
-                styleTextButon={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700px' }}
+            <ButtonComponents
+              // khi kik vào --đăng ký-- thì sẽ chạy hàm --handleSignIn--
+              onClick={handleUpdate}
+              // bordered={false}
+              size={40}
+              styleButon={{
+                height: '30px',
+                width: 'fit-content',
+                borderRadius: '4px',
+                padding: '2px 6px 6px'
+              }}
+              textButton={'Cập nhật'}
+              styleTextButon={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700px' }}
             ></ButtonComponents>
           </WrapperInput>
 
@@ -153,22 +154,22 @@ const ProfilePage = () => {
             {/* nơi nhập vào email */}
             <WrapperLabel htmlFor="email">Email</WrapperLabel>
             {/* đặt id cho --input-- để tý lấy dữ liệu thông qua id */}
-            <InputForm style={{ width: '300px' }} id="email" value={email} onChange={handleOnchangeEmail}/>  
+            <InputForm style={{ width: '300px' }} id="email" value={email} onChange={handleOnchangeEmail} />
 
             {/* nút button */}
-            <ButtonComponents 
-                // khi kik vào --đăng ký-- thì sẽ chạy hàm --handleSignIn--
-                onClick={ handleUpdate }
-                // bordered={false}
-                size={40}
-                styleButon={{
-                    height: '30px',
-                    width: 'fit-content',
-                    borderRadius: '4px',
-                    padding: '2px 6px 6px'
-                }}
-                textButton={'Cập nhật'}
-                styleTextButon={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700px' }}
+            <ButtonComponents
+              // khi kik vào --đăng ký-- thì sẽ chạy hàm --handleSignIn--
+              onClick={handleUpdate}
+              // bordered={false}
+              size={40}
+              styleButon={{
+                height: '30px',
+                width: 'fit-content',
+                borderRadius: '4px',
+                padding: '2px 6px 6px'
+              }}
+              textButton={'Cập nhật'}
+              styleTextButon={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700px' }}
             ></ButtonComponents>
           </WrapperInput>
 
@@ -176,22 +177,22 @@ const ProfilePage = () => {
             {/* nơi nhập vào email */}
             <WrapperLabel htmlFor="phone">Phone</WrapperLabel>
             {/* đặt id cho --input-- để tý lấy dữ liệu thông qua id */}
-            <InputForm style={{ width: '300px' }} id="phone" value={phone} onChange={handleOnchangePhone}/>  
+            <InputForm style={{ width: '300px' }} id="phone" value={phone} onChange={handleOnchangePhone} />
 
             {/* nút button */}
-            <ButtonComponents 
-                // khi kik vào --đăng ký-- thì sẽ chạy hàm --handleSignIn--
-                onClick={ handleUpdate }
-                // bordered={false}
-                size={40}
-                styleButon={{
-                    height: '30px',
-                    width: 'fit-content',
-                    borderRadius: '4px',
-                    padding: '2px 6px 6px'
-                }}
-                textButton={'Cập nhật'}
-                styleTextButon={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700px' }}
+            <ButtonComponents
+              // khi kik vào --đăng ký-- thì sẽ chạy hàm --handleSignIn--
+              onClick={handleUpdate}
+              // bordered={false}
+              size={40}
+              styleButon={{
+                height: '30px',
+                width: 'fit-content',
+                borderRadius: '4px',
+                padding: '2px 6px 6px'
+              }}
+              textButton={'Cập nhật'}
+              styleTextButon={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700px' }}
             ></ButtonComponents>
           </WrapperInput>
 
@@ -199,22 +200,22 @@ const ProfilePage = () => {
             {/* nơi nhập vào email */}
             <WrapperLabel htmlFor="address">Address</WrapperLabel>
             {/* đặt id cho --input-- để tý lấy dữ liệu thông qua id */}
-            <InputForm style={{ width: '300px' }} id="address" value={address} onChange={handleOnchangeAddress}/>  
+            <InputForm style={{ width: '300px' }} id="address" value={address} onChange={handleOnchangeAddress} />
 
             {/* nút button */}
-            <ButtonComponents 
-                // khi kik vào --đăng ký-- thì sẽ chạy hàm --handleSignIn--
-                onClick={ handleUpdate }
-                // bordered={false}
-                size={40}
-                styleButon={{
-                    height: '30px',
-                    width: 'fit-content',
-                    borderRadius: '4px',
-                    padding: '2px 6px 6px'
-                }}
-                textButton={'Cập nhật'}
-                styleTextButon={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700px' }}
+            <ButtonComponents
+              // khi kik vào --đăng ký-- thì sẽ chạy hàm --handleSignIn--
+              onClick={handleUpdate}
+              // bordered={false}
+              size={40}
+              styleButon={{
+                height: '30px',
+                width: 'fit-content',
+                borderRadius: '4px',
+                padding: '2px 6px 6px'
+              }}
+              textButton={'Cập nhật'}
+              styleTextButon={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700px' }}
             ></ButtonComponents>
           </WrapperInput>
 
@@ -235,27 +236,28 @@ const ProfilePage = () => {
                 width: '60px',
                 borderRadius: '50%',
                 objectFit: 'cover'
-              }} alt="avatar"/>
+              }} alt="avatar" />
             )}
 
             {/* nút button */}
-            <ButtonComponents 
-                // khi kik vào --đăng ký-- thì sẽ chạy hàm --handleSignIn--
-                onClick={ handleUpdate }
-                // bordered={false}
-                size={40}
-                styleButon={{
-                    height: '30px',
-                    width: 'fit-content',
-                    borderRadius: '4px',
-                    padding: '2px 6px 6px'
-                }}
-                textButton={'Cập nhật'}
-                styleTextButon={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700px' }}
+            <ButtonComponents
+              // khi kik vào --đăng ký-- thì sẽ chạy hàm --handleSignIn--
+              onClick={handleUpdate}
+              // bordered={false}
+              size={40}
+              styleButon={{
+                height: '30px',
+                width: 'fit-content',
+                borderRadius: '4px',
+                padding: '2px 6px 6px'
+              }}
+              textButton={'Cập nhật'}
+              styleTextButon={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700px' }}
             ></ButtonComponents>
           </WrapperInput>
 
         </WrapperContentProfile>
+        <br /><br /><br /><br /><br />
       </Loading>
     </div>
   )

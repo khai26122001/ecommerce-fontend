@@ -70,6 +70,7 @@ export const routes = [
         path: '/product-details/:id',
         page: ProductDetailsPage,
         isShowHeader: true
+        
     },
     {
         path: '/profile-user',

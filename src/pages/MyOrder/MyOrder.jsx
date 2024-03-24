@@ -258,7 +258,8 @@ const MyOrder = () => {
     <Loading isPending={isPending}>
       <WrapperContainer>
         <div style={{ height: '100%', width: '1270px', margin: '0 auto' }}>
-          <h4>Đơn hàng của tôi</h4>
+          <br />
+          <h2 style={{ textAlign: 'center' }}>Đơn hàng của tôi</h2>
           <WrapperListOrder>
             {data?.data?.map((order) => {
               return (
@@ -314,6 +315,7 @@ const MyOrder = () => {
             })}
           </WrapperListOrder>
         </div>
+        <br /><br /><br /><br />
       </WrapperContainer>
     </Loading>
   )

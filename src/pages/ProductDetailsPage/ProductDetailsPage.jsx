@@ -8,7 +8,7 @@ import * as CommentService from '../../services/CommentService'
 import { useMutationHooks } from '../../hooks/useMutationHooks'
 import { useSelector } from "react-redux";
 import { Image, List } from "antd";
-import { WrapperInput, WrapperLabel } from "./style";
+import { WrapperInput, WrapperLabel, WrapperTextarea } from "./style";
 import InputForm from "../../components/InputForm/InputForm";
 import ButtonComponents from "../../components/ButtonComponents/ButtonComponents";
 import { useQuery } from "@tanstack/react-query";
@@ -110,37 +110,19 @@ const ProductDetailsPage = () => {
 
     return (
         <div style={{ height: '100%', width: '100%', background: '#efefef' }}>
+
             {/* <div style={{ padding: '0 120px', background: '#efefef', height: '1000px' }}> */}
-            <div style={{ width: '1270px', height: '100%', margin: '0 auto' }}>
+            <div style={{ width: '85%', height: '100%', margin: '0 auto' }}>
                 <h6 style={{ color: "#efefef" }}>-</h6>
 
                 <h3 ><span onClick={() => navigate('/')} style={{ cursor: 'pointer', fontWeight: 'bold' }}>Trang chủ</span> - Chi tiết sản phẩm</h3>
                 {/* sau khi có --id-- ta sẽ chuyền vào */}
                 <ProductDetailsComponents idProduct={id} />
             </div>
-            <div>
-                {/* <Image
-                width={200}
-                src={user?.avatar}
-                alt="placeholder"
-            />
-            <br />
-            id của user: {user?.id}
-            <br />
-            id của sản phẩm: {id}
-            <br />
-            tên: {user?.name}
 
-            {user?.name} */}
-
-                {/* <CommentList comments={dataComment} /> */}
-
-
-
-
-
+            <div style={{ marginLeft: "7.5%" }}>
                 {/* Hiển thị danh sách comment */}
-                <div style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '20px', marginTop: "50px", backgroundColor: "#ffff" }}>
+                <div style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '20px', marginTop: "50px", backgroundColor: "#ffff", width: '92%' }}>
                     <h3 style={{ marginBottom: '20px', color: '#333', borderBottom: '1px solid #ddd', paddingBottom: '10px', textAlign: "center" }}>Danh sách comment</h3>
                     <ul style={{ listStyleType: 'none', padding: '0' }}>
                         {commentsData.map((comment, index) => (
@@ -161,7 +143,8 @@ const ProductDetailsPage = () => {
                                             <p style={{ fontWeight: 'bold', marginBottom: '5px', fontSize: '14px', marginRight: '10px' }}>{comment.name}</p>
                                             <p style={{ marginBottom: '5px' }}>{formatDate(comment.createdAt)}</p>
                                         </div>
-                                        <p style={{ fontSize: '17px', color: '#555' }}>{comment.user_comments}</p>
+
+                                        <p style={{ fontSize: '17px', color: '#555', whiteSpace: 'pre-wrap', maxWidth: '80%' }}>{comment.user_comments}</p>
                                     </div>
                                 </div>
                             </li>
@@ -171,16 +154,25 @@ const ProductDetailsPage = () => {
 
                 <WrapperInput>
                     {/* nút button */}
+                    <WrapperTextarea
+                        style={{
+                            width: '100%', resize: "none", resize: 'none',
+                            overflowY: 'auto', overflowX: 'hidden'
+                        }}
+                        value={comment}
+                        onChange={(e) => handleOnchangeComment(e.target.value)} // Gọi hàm handleOnchangeComment khi có sự thay đổi trong textarea
+                    />
                     <ButtonComponents
                         // khi kik vào --đăng ký-- thì sẽ chạy hàm --handleSignIn--
                         onClick={handleAddComment}
                         // bordered={false}
                         size={40}
                         styleButon={{
-                            height: '30px',
+                            height: '40px',
                             width: '10%',
                             borderRadius: '4px',
-                            padding: '2px 6px 6px'
+                            padding: '2px 6px 6px',
+                            marginBottom: '-3px'
                         }}
                         textButton={'Comment'}
                         styleTextButon={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700px' }}
@@ -188,14 +180,14 @@ const ProductDetailsPage = () => {
                     {/* nơi nhập vào email */}
                     {/* <WrapperLabel htmlFor="comment">comment</WrapperLabel> */}
                     {/* đặt id cho --input-- để tý lấy dữ liệu thông qua id */}
-                    <InputForm style={{ width: '100%' }} id="name" value={comment} onChange={handleOnchangeComment} />
+                    {/* <InputForm style={{ width: '100%' }} id="name" value={comment} onChange={handleOnchangeComment} /> */}
+
 
 
                 </WrapperInput>
-
-
-
+                <br></br>
             </div>
+
         </div>
     )
 }

@@ -6,6 +6,11 @@ import { PlusOutlined, DeleteOutlined, EditOutlined, SearchOutlined } from '@ant
 import InputComponents from '../InputComponents/InputComponents'
 import { getBase64, renderOption } from '../../utils'
 
+// ckeditor
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+
 // link tới trang --UserService--
 import * as ProductService from '../../services/ProductService'
 
@@ -238,7 +243,7 @@ const AdminProduct = () => {
         return (
             <div>
                 <DeleteOutlined style={{ color: 'red', fontSize: '30px', cursor: 'pointer', marginRight: '30px' }} onClick={() => setIsModalOpenDelete(true)} />
-                <EditOutlined style={{ color: 'red', fontSize: '30px', cursor: 'pointer' }} onClick={handleDetailsProduct} />
+                <EditOutlined style={{ color: 'blue', fontSize: '30px', cursor: 'pointer' }} onClick={handleDetailsProduct} />
             </div>
         )
     }
@@ -731,12 +736,32 @@ const AdminProduct = () => {
                             <InputComponents value={stateProduct.discount} onChange={handleOnchange} name="discount" />
                         </Form.Item>
 
-                        <Form.Item
+                        {/* <Form.Item
                             label="Description"
                             name="description"
                             rules={[{ required: true, message: 'Please input yor Description' }]}
                         >
                             <InputComponents value={stateProduct.description} onChange={handleOnchange} name="description" />
+                        </Form.Item> */}
+
+
+                        <Form.Item
+                            label="Description"
+                            name="description"
+                            rules={[{ required: true, message: 'Please input your Description' }]}
+                        >
+                            <CKEditor
+                                editor={ClassicEditor}
+                                data={stateProduct.description}
+                                onChange={(event, editor) => {
+                                    const data = editor.getData();
+                                    setStateProduct(prevState => ({
+                                        ...prevState,
+                                        description: data
+                                    }));
+                                }}
+                                value={stateProduct.description}
+                            />
                         </Form.Item>
 
                         <Form.Item
@@ -831,12 +856,31 @@ const AdminProduct = () => {
                             <InputComponents value={stateProductDetail.discount} onChange={handleOnchangeDetail} name="discount" />
                         </Form.Item>
 
-                        <Form.Item
+                        {/* <Form.Item
                             label="Description"
                             name="description"
                             rules={[{ required: true, message: 'Please input yor Description' }]}
                         >
                             <InputComponents value={stateProductDetail.description} onChange={handleOnchangeDetail} name="description" />
+                        </Form.Item> */}
+
+                        <Form.Item
+                            label="Description"
+                            name="description"
+                            rules={[{ required: true, message: 'Please input your Description' }]}
+                        >
+                            <CKEditor
+                                editor={ClassicEditor}
+                                data={stateProductDetail.description}
+                                onChange={(event, editor) => {
+                                    const data = editor.getData();
+                                    setStateProductDetail(prevState => ({
+                                        ...prevState,
+                                        description: data
+                                    }));
+                                }}
+                                
+                            />
                         </Form.Item>
 
                         <Form.Item
