@@ -99,7 +99,7 @@ const SignInPage = () => {
 
         // khi đẩy lên host thì nó ko nhận dx access_token nên phải thêm đoạn này
         const storage = localStorage.getItem('refresh_token')
-        const refresh_token = JSON.parse(storage)
+        const refreshToken = JSON.parse(storage)
 
 
 
@@ -110,7 +110,7 @@ const SignInPage = () => {
         // ta sẽ chuyền thông tin --_id, mail, password, isAdmin-- và --access_token-- cho updateUser
         // để lấy ra sử dụng bên phía --client-- thì phải
         console.log('res1111', res)
-        dispatch(updateUser({ ...res?.data, access_token: token, refresh_token}))
+        dispatch(updateUser({ ...res?.data, access_token: token, refreshToken}))
 
     }
 

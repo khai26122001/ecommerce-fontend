@@ -19,7 +19,7 @@ export const axiosJWT = axios.create()
 // }
 
 export const getAllComment = async (data) => {
-    const res = await axios.post(`hhttps://ecommerce-backend-pgsx.onrender.com/api/comment/getAllComment`, data)
+    const res = await axios.post(`http://localhost:3000/api/comment/getAllComment`, data)
     return res.data
 }
 
@@ -33,6 +33,6 @@ export const getAllComment = async (data) => {
 // }
 
 export const createComment = async (data) => {
-    const res = await axios.post(`https://ecommerce-backend-pgsx.onrender.com/api/comment/create-comment`, data)
+    const res = await axios.post(`http://localhost:3000/api/comment/create-comment`, data)
     return res.data
 }
