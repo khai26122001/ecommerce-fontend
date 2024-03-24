@@ -72,6 +72,12 @@ const SignInPage = () => {
             }
             // nhận --access_token-- từ --data--
             localStorage.setItem('access_token', JSON.stringify(data?.access_token))
+
+
+            // khi đẩy lên host thì nó ko nhận dx access_token nên phải thêm đoạn này
+            localStorage.setItem('refresh_token', JSON.stringify(data?.refresh_token))
+
+
             // nếu tồn tại --access_token-- từ data thì thực hiện
             if (data?.access_token) {
                 // dùng để nhận cái  --id và isAdmin-- của user thông qua hàm ---jwtDecode()---
@@ -89,6 +95,14 @@ const SignInPage = () => {
     // tạo ra 1 cái function để chuyền vào --id và token-- nhằm --call API đến server--
     // lúc này ta sẽ nhận được --id và access_token--
     const handleGetDetailsUser = async (id, token) => {
+
+
+        // khi đẩy lên host thì nó ko nhận dx access_token nên phải thêm đoạn này
+        const storage = localStorage.getItem('refresh_token')
+        const refresh_token = JSON.parse(storage)
+
+
+
         // sau khi truyền --id và access_token-- vào thì ta lấy được thông tin của --user-- 
         // gồm có --_id, mail, password, isAdmin--
         const res = await UserService.getDetailsUser(id, token)
@@ -96,7 +110,7 @@ const SignInPage = () => {
         // ta sẽ chuyền thông tin --_id, mail, password, isAdmin-- và --access_token-- cho updateUser
         // để lấy ra sử dụng bên phía --client-- thì phải
         console.log('res1111', res)
-        dispatch(updateUser({ ...res?.data, access_token: token }))
+        dispatch(updateUser({ ...res?.data, access_token: token, refresh_token}))
 
     }
 

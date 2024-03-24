@@ -34,8 +34,6 @@ const AdminUser = () => {
   const [BB, setb] = useState("FALSE");
 
   // thanh tìm kiếm
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
 
   // lấy token

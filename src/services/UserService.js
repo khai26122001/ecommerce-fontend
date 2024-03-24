@@ -8,13 +8,13 @@ export const axiosJWT = axios.create()
 
 // đăng nhập
 export const loginUser = async (data) => {
-    const res = await axios.post(`http://localhost:3000/api/user/sign-in`, data)
+    const res = await axios.post(`https://ecommerce-backend-pgsx.onrender.com/api/user/sign-in`, data)
     return res.data
 }
 
 // đăng ký
 export const signupUser = async (data) => {
-    const res = await axios.post(`http://localhost:3000/api/user/sign-up`, data)
+    const res = await axios.post(`https://ecommerce-backend-pgsx.onrender.com/api/user/sign-up`, data)
     return res.data
 }
 
@@ -23,7 +23,7 @@ export const signupUser = async (data) => {
 // nếu là --admin-- thì cho xem hết
 // còn là --user-- thì chỉ xem dx thông tin của --user-- đó
 export const getDetailsUser = async (id, access_token) => {
-    const res = await axiosJWT.get(`http://localhost:3000/api/user/get-details/${id}`, {
+    const res = await axiosJWT.get(`https://ecommerce-backend-pgsx.onrender.com/api/user/get-details/${id}`, {
         headers: {
             token: `Brearer ${access_token}`,
         }
@@ -31,23 +31,29 @@ export const getDetailsUser = async (id, access_token) => {
     return res.data
 }
 
-export const refreshToken = async () => {
-    const res = await axios.post(`http://localhost:3000/api/user/refresh-token` , {
+
+// thêm --refreshToken-- zo để đưa lên host
+export const refreshToken = async (refreshToken) => {
+    console.log('refreshToken', refreshToken)
+    const res = await axios.post(`https://ecommerce-backend-pgsx.onrender.com/api/user/refresh-token`, {}, {
         // này có tác dụng khi mà có --cookie-- nó sẽ tự động lấy cho mình rồi chuyền xuống backend
-        withCredentials: true
+        // withCredentials: true
+        headers: {
+            token: `Bearer ${refreshToken}`,
+        }
     })
     return res.data
 }
 
 export const logoutUser = async () => {
-    const res = await axios.post(`http://localhost:3000/api/user/log-out`)
+    const res = await axios.post(`https://ecommerce-backend-pgsx.onrender.com/api/user/log-out`)
     return res.data
 }
 
 export const updateUser = async (id, data, access_token) => {
     // phải bỏ cái --axiosJWT-- để tránh --access_token-- hết hạn nó sẽ lỗi 
-    const res = await axiosJWT.put(`http://localhost:3000/api/user/update-user/${id}`, data, {
-    // const res = await axios.put(`http://localhost:3000/api/user/update-user/${id}`, data, {
+    const res = await axiosJWT.put(`https://ecommerce-backend-pgsx.onrender.com/api/user/update-user/${id}`, data, {
+    // const res = await axios.put(`https://ecommerce-backend-pgsx.onrender.com/api/user/update-user/${id}`, data, {
         // này dùng để làm chỉ có user đó hoặc là admin mới có quyền xửa thông tin
         headers: {
             token: `Brearer ${access_token}`,
@@ -59,7 +65,7 @@ export const updateUser = async (id, data, access_token) => {
 
 
 export const getAllUser = async (access_token) => {
-    const res = await axios.get(`http://localhost:3000/api/user/getAll`, {
+    const res = await axios.get(`https://ecommerce-backend-pgsx.onrender.com/api/user/getAll`, {
         headers: {
             token: `Brearer ${access_token}`,
         }
@@ -68,7 +74,7 @@ export const getAllUser = async (access_token) => {
 }
 
 export const deleteUser = async (id, access_token) => {
-    const res = await axiosJWT.delete(`http://localhost:3000/api/user/delete-user/${id}`, {
+    const res = await axiosJWT.delete(`https://ecommerce-backend-pgsx.onrender.com/api/user/delete-user/${id}`, {
         headers: {
             token: `Brearer ${access_token}`,
         }
@@ -77,7 +83,7 @@ export const deleteUser = async (id, access_token) => {
 }
 
 export const deleteUserMany = async (data, access_token) => {
-    const res = await axiosJWT.post(`http://localhost:3000/api/user/delete-many`, data,  {
+    const res = await axiosJWT.post(`https://ecommerce-backend-pgsx.onrender.com/api/user/delete-many`, data,  {
         headers: {
             token: `Brearer ${access_token}`,
         }

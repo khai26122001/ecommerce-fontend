@@ -22,7 +22,6 @@ import Loading from '../../components/loadingComponents/Loading'
 import { useDebounce } from '../../hooks/useDebounce'
 import { Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import FooterComponents from '../../components/FooterComponents/FooterComponents'
 
 
 

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { WrapperInfo, WrapperLeft, WrapperRight, WrapperTotal, WrapperRadio } from './style';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Checkbox, Form, Radio } from 'antd';
+import { Form, Radio } from 'antd';
 
 // cái xử lý bên state order
 import { convertPrice } from '../../utils';

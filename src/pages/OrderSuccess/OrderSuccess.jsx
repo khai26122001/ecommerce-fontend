@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { WrapperInfo, WrapperContainer, WrapperValue, WrapperItemOrder, WrapperItemOrderInfo } from './style';
-import { DeleteOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons'
 
 import { useSelector } from 'react-redux';
-import { Checkbox } from 'antd';
 
 import Loading from '../../components/loadingComponents/Loading';
 import { useLocation } from 'react-router-dom';

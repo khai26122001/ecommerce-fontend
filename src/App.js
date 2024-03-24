@@ -12,7 +12,7 @@ import { isJsonString } from './utils'
 // sau khi --login-- thành công thi add thư viện này zo n
 // dùng để lấy thông tin của user
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUser } from './redux/slides/userSlide'
+import { resetUser, updateUser } from './redux/slides/userSlide'
 
 // link tới trang --UserService--
 import * as UserService from './services/UserService'
@@ -109,6 +109,15 @@ UserService.axiosJWT.interceptors.request.use(async (config) => {
   // console.log('decode test', decode)
 
 
+
+  // thêm refresh_token zo để đưa lên host
+  let storageRefreshToken = localStorage.getItem('refresh_token')
+  const refresh_token = JSON.parse(storageRefreshToken)
+  const decodedRefreshToken = jwtDecode(refresh_token)
+
+
+
+
   // let storageRefreshToken = localStorage.getItem('refresh_token')
   // const refreshToken = JSON.parse(storageRefreshToken)
   // const decodedRefreshToken =  jwt_decode(refreshToken)
@@ -117,11 +126,21 @@ UserService.axiosJWT.interceptors.request.use(async (config) => {
   // lúc này mình se check nếu: thời gian --token-- hết hạn (--decode?.exp--) nếu bé hơn thời gian 
   // hiện tại (--currentTime.getTime() / 1000)--) của mình thì thực hiện
   if (decode?.exp < currentTime.getTime() / 1000) {
-    // gọi tới để cấp lại --token--
-    const data = await UserService.refreshToken()
-    // sau khi có được data.access_token ta sẽ tiến hành lấy ra
-    config.headers['token'] = `Bearer ${data?.access_token}`
-    // console.log('config.headers', config.headers['token'])
+
+
+    // thêm 1 vòng lặp nữa để đưa lên host
+    // xem cái refreshToken đó còn hạn ko nếu còn hạn thì cấp lại cái access_token
+    if(decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
+      // gọi tới để cấp lại --token--
+      const data = await UserService.refreshToken()
+      // sau khi có được data.access_token ta sẽ tiến hành lấy ra
+      config.headers['token'] = `Bearer ${data?.access_token}`
+      // console.log('config.headers', config.headers['token'])
+    } else {
+      dispatch(resetUser())
+    }
+
+
   }
   return config;
 }, (err) => {
@@ -136,6 +155,13 @@ UserService.axiosJWT.interceptors.request.use(async (config) => {
 const handleGetDetailsUser = async (id, token) => {
     
     try {
+
+      // đưa lên host nên thêm refresh_token zo
+      let storageRefreshToken = localStorage.getItem('refresh_token')
+      const refresh_token = JSON.parse(storageRefreshToken)
+
+
+
       // let storageRefreshToken = localStorage.getItem('refresh_token')
       // const refreshToken = JSON.parse(storageRefreshToken)
 
@@ -146,7 +172,7 @@ const handleGetDetailsUser = async (id, token) => {
 
       // ta sẽ chuyền thông tin --_id, mail, password, isAdmin-- và --access_token-- cho updateUser
       // để lấy ra sử dụng bên phía --client-- thì phải
-      dispatch(updateUser({ ...res?.data, access_token: token }))
+      dispatch(updateUser({ ...res?.data, access_token: token, refresh_token: refresh_token }))
     } catch (error) {
       
     }

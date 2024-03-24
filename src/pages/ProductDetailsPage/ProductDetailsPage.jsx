@@ -7,12 +7,9 @@ import * as CommentService from '../../services/CommentService'
 // link tới trang dùng để lấy dữ liệu dưới backend lên
 import { useMutationHooks } from '../../hooks/useMutationHooks'
 import { useSelector } from "react-redux";
-import { Image, List } from "antd";
-import { WrapperInput, WrapperLabel, WrapperTextarea } from "./style";
-import InputForm from "../../components/InputForm/InputForm";
+import { WrapperInput, WrapperTextarea } from "./style";
 import ButtonComponents from "../../components/ButtonComponents/ButtonComponents";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../../components/loadingComponents/Loading";
 
 const ProductDetailsPage = () => {
     // sẽ dùng cái thằng này để lấy ra --id của product-- này

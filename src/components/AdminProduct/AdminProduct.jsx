@@ -37,8 +37,6 @@ const AdminProduct = () => {
     const [typeSelect, setTypeSelect] = useState('');
 
     // thanh tìm kiếm
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
 
     // lấy token
@@ -59,21 +57,7 @@ const AdminProduct = () => {
         }
     )
 
-    // ----củ
-    // tạo --useState-- để chứa dữ liệu dùng để --create--
-    // const [stateProduct, setStateProduct] = useState({
-    //     name: '',
-    //     image: '',
-    //     type: '',
-    //     countInStock: '',
-    //     price: '',
-    //     rating: '',
-    //     description: '',
-    //     newType: '',
-    //     discount: ''
-    // })
-
-    //---mới
+   
     // tạo ra cái này nhắm tránh cho khi update mình bấm zo lại create thì dữ liệu nó vẫn còn đổ lên create
     const [stateProduct, setStateProduct] = useState(inittial())
 
@@ -317,20 +301,6 @@ const AdminProduct = () => {
                 setTimeout(() => searchInput.current?.select(), 100);
             }
         },
-        // render: (text) =>
-        // searchedColumn === dataIndex ? (
-        //     <Highlighter
-        //     highlightStyle={{
-        //         backgroundColor: '#ffc069',
-        //         padding: 0,
-        //     }}
-        //     searchWords={[searchText]}
-        //     autoEscape
-        //     textToHighlight={text ? text.toString() : ''}
-        //     />
-        // ) : (
-        //     text
-        // ),
     });
     // dữ liệu trong bảng map với --database-- lấy từ dưới backend
     const columns = [

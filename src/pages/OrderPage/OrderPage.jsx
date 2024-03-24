@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { WrapperCountOrder, WrapperInfo, WrapperItemOrder, WrapperLeft, WrapperListOrder, WrapperRight, WrapperStyleHeader, WrapperTotal, WrapperStyleHeaderDilivery } from './style';
 import { DeleteOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons'
-import { WrapperInputNumber, WrapperQualityProduct } from '../../components/ProductDetailsComponents/style';
+import { WrapperInputNumber } from '../../components/ProductDetailsComponents/style';
 import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox, Form } from 'antd';
 
@@ -23,7 +23,6 @@ import * as message from '../../components/Message/Message'
 import { updateUser } from '../../redux/slides/userSlide';
 import { useNavigate } from 'react-router-dom';
 import Step from '../../components/step/Step';
-import { current } from '@reduxjs/toolkit';
 
 const OrderPage = () => {
   const navigate = useNavigate()

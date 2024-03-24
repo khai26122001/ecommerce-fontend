@@ -1,5 +1,4 @@
 import React from 'react';
-import { WrapperFooter } from './style'
 import logoo from '../../assets/images/LOGOO.webp'
 import { Image } from 'antd';
 

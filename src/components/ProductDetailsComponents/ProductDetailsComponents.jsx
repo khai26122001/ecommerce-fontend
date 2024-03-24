@@ -12,7 +12,7 @@ import { useEffect, useState } from "react"
 // import { useQuery } from "@tanstack/react-query"
 import Loading from "../loadingComponents/Loading"
 import { useDispatch, useSelector } from "react-redux"
-import { Navigate, useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { addOrderProduct } from "../../redux/slides/orderSlide"
 import { convertPrice } from "../../utils"
 
@@ -97,28 +97,7 @@ const ProductDetailsComponents = ({ idProduct }) => {
             setNumProduct(numProduct - 1)
         }
     }
-
-    /*
-        // cách 2
-        // hàm dùng để loard dữ liệu lên trên client phía admin
-        const fetchGetDetailsProduct = async (context) => {
-            console.log('context', context)
-            const id = context?.queryKey && context?.queryKey[1]
-            if (id) {
-                const res = await ProductService.getDetailProduct(id)
-                // console.log('res', res)
-                return res.data
-            }
-        }
     
-    
-        // dùng để loard dữ liệu lên trên client phía admin
-        const { isPending, data: productsDetails } = useQuery({ queryKey: ['product-details', idProduct], queryFn: fetchGetDetailsProduct, config: { enable : !!idProduct } })
-        // lúc này đã có dữ liệu thông qua --data: products--
-        console.log('data: products', productsDetails)
-    */
-
-
 
     // bắt đầu qua trang order
     const handleAddOrderProduct = () => {

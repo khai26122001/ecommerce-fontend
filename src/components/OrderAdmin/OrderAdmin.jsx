@@ -1,31 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { WrapperHeader, WrapperUploadFile } from './style'
-import { Button, Form, Space } from 'antd'
+import React, { useState } from 'react'
+import { WrapperHeader } from './style'
+import { Button, Space } from 'antd'
 import TableComponent from '../TableComponent/TableComponent'
-import { DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons'
+import { SearchOutlined } from '@ant-design/icons'
 import InputComponents from '../InputComponents/InputComponents'
-import { getBase64 } from '../../utils'
 
 // link tới trang --OrderService--
 import * as OrderService from '../../services/OrderService'
-import * as UserService from '../../services/UserService'
 
-// link tới trang dùng để lấy dữ liệu dưới backend lên
-import { useMutationHooks } from '../../hooks/useMutationHooks'
-
-// lỏa lại trang thì phải
-import Loading from '../loadingComponents/Loading'
-// link tới trang làm thông báo cho ta biết đã đăng ký thành công
-import * as message from '../Message/Message'
 import { useQuery } from '@tanstack/react-query'
-import DrawerComponent from '../DrawerComponent/DrawerComponent'
 import { useSelector } from 'react-redux'
-import ModalComponent from '../ModalComponent/ModalComponent'
 import { oderContant } from '../../contant'
 
 const OrderAdmin = () => {
-
-  const [rowSelected, setRowSelected] = useState('');
 
   // lấy token
   const user = useSelector((state) => state.user)
@@ -46,7 +33,7 @@ const OrderAdmin = () => {
 
   // thanh tìm kiếm của --ant thư viện của react--
   const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+    filterDropdown: ({ setSelectedKeys, selectedKeys }) => (
       <div
         style={{
           padding: 8,
