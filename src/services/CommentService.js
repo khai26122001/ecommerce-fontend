@@ -8,8 +8,8 @@ export const axiosJWT = axios.create()
 
 // export const updateUser = async (id, data, access_token) => {
 //     // phải bỏ cái --axiosJWT-- để tránh --access_token-- hết hạn nó sẽ lỗi 
-//     const res = await axiosJWT.put(`https://ecommerce-backend-dgl7.onrender.com/api/user/update-user/${id}`, data, {
-//     // const res = await axios.put(`https://ecommerce-backend-dgl7.onrender.com/api/user/update-user/${id}`, data, {
+//     const res = await axiosJWT.put(`http://localhost:3000/api/user/update-user/${id}`, data, {
+//     // const res = await axios.put(`http://localhost:3000/api/user/update-user/${id}`, data, {
 //         // này dùng để làm chỉ có user đó hoặc là admin mới có quyền xửa thông tin
 //         headers: {
 //             token: `Brearer ${access_token}`,
@@ -19,12 +19,12 @@ export const axiosJWT = axios.create()
 // }
 
 export const getAllComment = async (data) => {
-    const res = await axios.post(`https://ecommerce-backend-dgl7.onrender.com/api/comment/getAllComment`, data)
+    const res = await axios.post(`http://localhost:3000/api/comment/getAllComment`, data)
     return res.data
 }
 
 // export const deleteUser = async (id, access_token) => {
-//     const res = await axiosJWT.delete(`https://ecommerce-backend-dgl7.onrender.com/api/user/delete-user/${id}`, {
+//     const res = await axiosJWT.delete(`http://localhost:3000/api/user/delete-user/${id}`, {
 //         headers: {
 //             token: `Brearer ${access_token}`,
 //         }
@@ -33,6 +33,6 @@ export const getAllComment = async (data) => {
 // }
 
 export const createComment = async (data) => {
-    const res = await axios.post(`https://ecommerce-backend-dgl7.onrender.com/api/comment/create-comment`, data)
+    const res = await axios.post(`http://localhost:3000/api/comment/create-comment`, data)
     return res.data
 }
