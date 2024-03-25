@@ -151,6 +151,7 @@ const TypeProductPage = () => {
                                             // cái id dùng để phân biệt sản phẩm nào
                                             id={product._id}
                                         />
+
                                     )
                                 })}
                             </WrapperProducts>

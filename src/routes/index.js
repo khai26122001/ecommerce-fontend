@@ -12,6 +12,9 @@ import PaymentPage from "../pages/PaymentPage/PaymentPage";
 import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
 import MyOrder from "../pages/MyOrder/MyOrder";
 import DetailsOrderPage from "../pages/DetailsOrderPage/DetailsOrderPage";
+import IntroductionPage from "../pages/IntroductionPage/IntroductionPage";
+import SiteMap from "../pages/SiteMap/SiteMap";
+
 
 // trang này để điều hướng đường link đến các trang page tương ứng
 // củng như là phụ trách thêm biến isShowHeader để biết header có thể hiện ở trang nào
@@ -47,8 +50,18 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/products',
+        path: '/contact',
         page: ProductsPage,
+        isShowHeader: true
+    },
+    {
+        path: '/introduction',
+        page: IntroductionPage,
+        isShowHeader: true
+    },
+    {
+        path: '/SiteMap',
+        page: SiteMap,
         isShowHeader: true
     },
     {

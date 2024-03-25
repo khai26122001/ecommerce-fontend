@@ -1,11 +1,15 @@
 import React from 'react';
 import logoo from '../../assets/images/LOGOO.webp'
 import { Image } from 'antd';
+import { WrapperUnderlined } from './style'
+import { useNavigate } from 'react-router-dom';
 
 
 const FooterComponents = () => {
+    const navigate = useNavigate()
     return (
         <footer style={{ backgroundColor: '#fff', color: "#000" }}>
+            <WrapperUnderlined></WrapperUnderlined>
             <Image key='logoo' src={logoo} alt="logoo" preview={false}
                 style={{ position: 'absolute', top: "40px", left: "20px", width: "400px", height: "150px" }}
             />
@@ -20,11 +24,11 @@ const FooterComponents = () => {
                     <div style={{ marginTop: '-120px', marginLeft: '400px' }}>
                         <h3 style={{ color: "#000", marginBottom: "10px" }}>Liên kết nhanh</h3>
                         <ul style={{ listStyle: "none", padding: 0 }}>
-                            <li style={{ marginBottom: "10px" }}><a href="#" style={{ color: "#000", textDecoration: "none", transition: "color 0.3s ease" }}>Trang chủ</a></li>
-                            <li style={{ marginBottom: "10px" }}><a href="#" style={{ color: "#000", textDecoration: "none", transition: "color 0.3s ease" }}>Giới thiệu</a></li>
-                            <li style={{ marginBottom: "10px" }}><a href="#" style={{ color: "#000", textDecoration: "none", transition: "color 0.3s ease" }}>Sản phẩm</a></li>
-                            <li style={{ marginBottom: "10px" }}><a href="#" style={{ color: "#000", textDecoration: "none", transition: "color 0.3s ease" }}>Dịch vụ</a></li>
-                            <li style={{ marginBottom: "10px" }}><a href="#" style={{ color: "#000", textDecoration: "none", transition: "color 0.3s ease" }}>Liên hệ</a></li>
+                            <li style={{ marginBottom: "10px" }}><a onClick={() => { navigate('/') }} style={{ textDecoration: "none", transition: "color 0.3s ease" }}>Trang chủ</a></li>
+                            <li style={{ marginBottom: "10px" }}><a onClick={() => { navigate('/SiteMap') }} style={{  textDecoration: "none", transition: "color 0.3s ease" }}>Site Map</a></li>
+                            <li style={{ marginBottom: "10px" }}><a onClick={() => { navigate('/introduction') }} style={{  textDecoration: "none", transition: "color 0.3s ease" }}>Giới thiệu</a></li>
+                            <li style={{ marginBottom: "10px" }}><a onClick={() => { navigate('/') }} style={{  textDecoration: "none", transition: "color 0.3s ease" }}>Sản phẩm</a></li>
+                            <li style={{ marginBottom: "10px" }}><a onClick={() => { navigate('/contact') }} style={{  textDecoration: "none", transition: "color 0.3s ease" }}>Liên hệ</a></li>
                         </ul>
                     </div>
                 </div>

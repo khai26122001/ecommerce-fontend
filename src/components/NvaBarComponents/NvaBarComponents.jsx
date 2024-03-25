@@ -26,7 +26,7 @@ const NvaBarComponents = ({ typeProducts }) => {
                     <Checkbox.Group style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '15px', marginBottom: '15px' }} onChange={onChange} >
                         {options.map((option, index) => {
                             return (
-                                <Checkbox key={index} style={{ marginLeft: 0 }} value={option.value}>{option.label}</Checkbox>
+                                <Checkbox key={index} style={{ marginLeft: 0 }} value={option.value}>{option.label} Lựa Chọn</Checkbox>
                             )
                         })}
                     </Checkbox.Group>
@@ -36,14 +36,14 @@ const NvaBarComponents = ({ typeProducts }) => {
                     return (
                         <div key={index} style={{ display: 'flex' }}>
                             <Rate style={{ fontSize: '12px' }} disabled defaultValue={option} />
-                            <span> {`từ ${option} sao`} </span>
+                            <span>&emsp; {`từ ${option} sao`} </span>
                         </div>
                     )
                 })
             case 'price':
                 return options.map((option, index) => {
                     return (
-                        <WrapperTextPrice key={index}>{option}</WrapperTextPrice>
+                        <WrapperTextPrice style={{ marginBottom: '-10px' }} key={index}>{option}</WrapperTextPrice>
                     )
                 })
             default:
