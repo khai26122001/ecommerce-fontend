@@ -73,21 +73,23 @@ const DetailsOrderPage = () => {
     return (
         <Loading isPending={isPending}>
             <Row style={{ flexWrap: 'nowrap', height: 'calc(100% - 20px)', marginBottom: '15px' }}>
-                <Col span={4} style={{ marginLeft: '20px', borderRight: '1px solid #EDEDED' }}>
-                    <WrapperLableText style={{ marginTop: '25px' }}>Lable</WrapperLableText>
+                <Col span={4} style={{ borderRight: '1px solid #EDEDED' }}>
+                    <div style={{ marginLeft: '20px' }}>
+                        <WrapperLableText style={{ marginTop: '25px' }}>Lable</WrapperLableText>
 
-                    <WrapperContent>
-                        {renderContent('checkbox', [
-                            { value: 'a', lable: 'A' },
-                            { value: 'b', lable: 'B' }
-                        ])}
-                    </WrapperContent>
-                    <WrapperContent>
-                        {renderContent('star', [3, 4, 5])}
-                    </WrapperContent>
-                    <WrapperContent>
-                        {renderContent('price', ['Dưới 40', 'Trên 50.000'])}
-                    </WrapperContent>
+                        <WrapperContent>
+                            {renderContent('checkbox', [
+                                { value: 'a', lable: 'A' },
+                                { value: 'b', lable: 'B' }
+                            ])}
+                        </WrapperContent>
+                        <WrapperContent>
+                            {renderContent('star', [3, 4, 5])}
+                        </WrapperContent>
+                        <WrapperContent>
+                            {renderContent('price', ['Dưới 40', 'Trên 50.000'])}
+                        </WrapperContent>
+                    </div>
 
                 </Col>
 
@@ -116,7 +118,7 @@ const DetailsOrderPage = () => {
                                     </WrapperContentInfo>
                                 </WrapperInfoUser>
 
-                                <WrapperInfoUser style={{ marginRight: '20px' }}>
+                                <WrapperInfoUser style={{ marginRight: '40px' }}>
                                     <WrapperLabel>Hình thức thanh toán</WrapperLabel>
                                     <WrapperContentInfo>
                                         <div className='payment-info'>{oderContant.payment[data?.paymentMethod]}</div>
